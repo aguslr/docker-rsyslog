@@ -1,7 +1,7 @@
 [aguslr/docker-rsyslog][1]
 ==========================
 
-[![publish-docker-image](https://github.com/aguslr/docker-rsyslog/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/aguslr/docker-rsyslog/actions/workflows/docker-publish.yml) [![docker-pulls](https://img.shields.io/docker/pulls/aguslr/rsyslog)](https://hub.docker.com/r/aguslr/rsyslog) [![image-size](https://img.shields.io/docker/image-size/aguslr/rsyslog/latest)](https://hub.docker.com/r/aguslr/rsyslog)
+[![docker-pulls](https://img.shields.io/docker/pulls/aguslr/rsyslog)](https://hub.docker.com/r/aguslr/rsyslog) [![image-size](https://img.shields.io/docker/image-size/aguslr/rsyslog/latest)](https://hub.docker.com/r/aguslr/rsyslog)
 
 
 This *Docker* image sets up *Rsyslog* inside a docker container.
