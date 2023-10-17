@@ -11,7 +11,3 @@ services:
     ports:
       - 514:514/tcp
       - 514:514/udp
-    healthcheck:
-      test: timeout 2 nc -z 127.0.0.1 514
-      interval: 1m
-      timeout: 3s
