@@ -1,10 +1,13 @@
-ARG BASE_IMAGE=library/alpine:latest
+ARG BASE_IMAGE=library/debian:stable-slim
 
 FROM docker.io/${BASE_IMAGE}
 
 RUN \
-  apk add --update --no-cache rsyslog logrotate supervisor \
-  && rm -rf /var/cache/apk/* && \
+  apt-get update && \
+  env DEBIAN_FRONTEND=noninteractive \
+  apt-get install -y --no-install-recommends rsyslog logrotate supervisor \
+  -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" \
+  && apt-get clean && rm -rf /var/lib/apt/lists/* /var/lib/apt/lists/* && \
   mkdir -p /var/log/supervisord /var/run/supervisord
 
 COPY config/logrotate.conf /etc/logrotate.d/rsyslog-server
@@ -16,7 +19,7 @@ EXPOSE 514/tcp 514/udp
 VOLUME /etc/rsyslog.d /var/log
 
 HEALTHCHECK --interval=1m --timeout=3s \
-  CMD timeout 2 nc -z 127.0.0.1 514
+  CMD timeout 2 bash -c 'cat < /dev/null > /dev/tcp/127.0.0.1/514'
 
 ENTRYPOINT ["/usr/bin/supervisord"]
 CMD ["-c", "/etc/supervisord.conf"]
