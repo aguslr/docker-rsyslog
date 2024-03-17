@@ -18,7 +18,7 @@ To use *docker-rsyslog*, follow these steps:
 1. Clone and start the container:
 
        docker run -p 514:514 \
-         -v ./logs:/var/log docker.io/aguslr/rsyslog:latest
+         -v "${PWD}"/logs:/var/log docker.io/aguslr/rsyslog:latest
 
 2. Configure your logging systems to save to your *Rsyslog* server's IP address
    on port `514`.
