@@ -10,9 +10,7 @@ RUN \
   && apt-get clean && rm -rf /var/lib/apt/lists/* /var/lib/apt/lists/* && \
   mkdir -p /var/log/supervisord /var/run/supervisord
 
-COPY config/logrotate.conf /etc/logrotate.d/rsyslog-server
-COPY config/rsyslog.conf /etc/rsyslog.conf
-COPY config/supervisord.conf /etc/supervisord.conf
+COPY rootfs/ /
 
 EXPOSE 514/tcp 514/udp
 
