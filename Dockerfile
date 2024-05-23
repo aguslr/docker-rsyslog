@@ -2,13 +2,17 @@ ARG BASE_IMAGE=library/debian:stable-slim
 
 FROM docker.io/${BASE_IMAGE}
 
-RUN \
-  apt-get update && \
-  env DEBIAN_FRONTEND=noninteractive \
-  apt-get install -y --no-install-recommends rsyslog logrotate supervisor \
-  -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold" \
-  && apt-get clean && rm -rf /var/lib/apt/lists/* /var/lib/apt/lists/* && \
-  mkdir -p /var/log/supervisord /var/run/supervisord
+RUN <<-EOT bash
+	set -eu
+
+	apt-get update
+	env DEBIAN_FRONTEND=noninteractive \
+		apt-get install -y --no-install-recommends rsyslog logrotate supervisor \
+		-o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confold"
+	apt-get clean && rm -rf /var/lib/apt/lists/* /var/lib/apt/lists/*
+
+	mkdir -p /var/log/supervisord /var/run/supervisord
+EOT
 
 COPY rootfs/ /
 
